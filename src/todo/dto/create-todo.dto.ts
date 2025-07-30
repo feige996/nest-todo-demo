@@ -5,26 +5,15 @@ import { ApiProperty } from '@nestjs/swagger';
  */
 export class CreateTodoDto {
   /**
-   * 待办事项的标题
+   * 待办事项的名称
    * @example 学习 NestJS
    */
   @ApiProperty({
-    description: '待办事项的标题',
+    description: '待办事项的名称',
     example: '学习 NestJS',
     required: true,
   })
-  title: string;
-
-  /**
-   * 待办事项的描述
-   * @example 完成 NestJS 基础教程
-   */
-  @ApiProperty({
-    description: '待办事项的描述',
-    example: '完成 NestJS 基础教程',
-    required: false,
-  })
-  description?: string;
+  name: string;
 
   /**
    * 待办事项的完成状态
@@ -36,5 +25,5 @@ export class CreateTodoDto {
     required: false,
     default: false,
   })
-  completed?: boolean;
+  done?: boolean;
 }
