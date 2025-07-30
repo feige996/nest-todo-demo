@@ -10,6 +10,13 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // 配置跨域访问
+  app.enableCors({
+    origin: '*', // 允许所有来源，生产环境应限制具体域名
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   // 注册全局响应拦截器
   app.useGlobalInterceptors(new ResponseInterceptor());
 
