@@ -1,12 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 /**
  * 应用启动函数
  */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // 注册全局响应拦截器
+  app.useGlobalInterceptors(new ResponseInterceptor());
+
+  // 注册全局异常过滤器
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   // 配置 Swagger 文档
   const config = new DocumentBuilder()
